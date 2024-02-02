@@ -23,11 +23,13 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", width: "30vw", height: "20vh", justifyContent: "space-between",marginTop: "35vh" ,margin: "auto" }}>
       <h2>Login</h2>
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       <button onClick={handleLogin}>Login</button>
+
+      No Account?      <button onClick={() => navigate("/register")}>Register</button>
     </div>
   );
 };

@@ -12,9 +12,18 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
+  const [birthdate, setBirthdate] = useState('');
 
   const handleRegister = () => {
-    // Implement validation and API call for registration
+    // Validate the form data
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !birthdate) {
+      console.error('Please fill in all fields');
+      return;
+    }
+
+    // Implement additional validation if needed
+
+    // Create user data object
     const userData = {
       firstName,
       lastName,
@@ -22,31 +31,30 @@ const Register = () => {
       password,
       confirmPassword,
       profilePicture,
+      birthdate,
     };
+
+    // Dispatch the registration action
     dispatch(register(userData));
   };
 
-  console.log("rendered")
-
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    // You may want to handle file upload here
-    setProfilePicture(file);
+    if (file) {
+      setProfilePicture(file);
+    }
   };
+  
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '30vw', height: '50vh', justifyContent: 'space-between', marginTop: '25vh', margin: 'auto' }}>
       <h2>Register</h2>
       <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
       <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
       <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <input
-        type="password"
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+      <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+      <input type="date" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       <button onClick={handleRegister}>Register</button>
     </div>
